@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoApp.View.Concluidos"
+             Title="Itens concluídos">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="lst_todos" ItemSelected="lst_todos_ItemSelected" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="20,20,0,0" Style="{StaticResource stacklayoutStyle}">
+                                <Grid ColumnDefinitions="Auto" RowDefinitions="Auto">
+                                    <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" Text="{Binding Name}"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

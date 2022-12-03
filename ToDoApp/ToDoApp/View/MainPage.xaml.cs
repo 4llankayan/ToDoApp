@@ -14,6 +14,8 @@ namespace ToDoApp.View
     {
         public MainPage()
         {
+            Title = "Seus afazeres";
+
             NavigationPage navigationPage = new NavigationPage(new Concluidos());
             navigationPage.Title = "Itens concluídos";
             Children.Add(new Listagem());

@@ -20,22 +20,40 @@ namespace ToDoApp.View
             InitializeComponent();
 
             lst_todos.ItemsSource = lista_todos;
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         protected override void OnAppearing()
         {
-            if (lista_todos.Count == 0)
-            {
-                Task.Run(async () =>
-                {
-                    List<ToDo> temp = await App.Db.GetAllDone();
+            lista_todos.Clear();
 
-                    foreach (ToDo t in temp)
-                    {
-                        lista_todos.Add(t);
-                    }
-                });
-            }
+            Task.Run(async () =>
+            {
+                List<ToDo> temp = await App.Db.GetAllDone();
+
+                foreach (ToDo t in temp)
+                {
+                    lista_todos.Add(t);
+                }
+            });
+        }
+
+        private void lst_todos_Refreshing(object sender, EventArgs e)
+        {
+            lista_todos.Clear();
+
+            Task.Run(async () =>
+            {
+                List<ToDo> temp = await App.Db.GetAllPendent();
+
+                foreach (ToDo t in temp)
+                {
+                    lista_todos.Add(t);
+                }
+            });
+
+            ref_carregando.IsRefreshing = false;
         }
 
         private void lst_todos_ItemSelected(object sender, SelectedItemChangedEventArgs e)

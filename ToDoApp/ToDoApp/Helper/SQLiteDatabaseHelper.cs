@@ -24,9 +24,9 @@ namespace ToDoApp.Helper
 
         public Task<List<ToDo>> Update(ToDo t)
         {
-            string sql = "UPDATE ToDo SET Name = ?, Description = ?, Done = ?, CreatedAt = Now()";
+            string sql = "UPDATE ToDo SET Name = ?, Description = ?, Done = ?, CreatedAt = ? WHERE id=?";
 
-            return _conn.QueryAsync<ToDo>(sql, t.Name, t.Description, t.Done, t.Id);
+            return _conn.QueryAsync<ToDo>(sql, t.Name, t.Description, t.Done, DateTime.Now, t.Id) ;
         }
 
         public Task<List<ToDo>> GetAll()
@@ -51,7 +51,7 @@ namespace ToDoApp.Helper
 
         public Task<List<ToDo>> Search(string q)
         {
-            string sql = "SELECT * FROM ToDo WHERE Name LIKE '%" + q + "%'";
+            string sql = "SELECT * FROM ToDo WHERE Name LIKE '%" + q + "%' AND Done = false";
 
             return _conn.QueryAsync<ToDo>(sql);
         }

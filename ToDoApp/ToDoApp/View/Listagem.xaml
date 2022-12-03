@@ -38,28 +38,38 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    
     <ContentPage.Content>
         <AbsoluteLayout>
-            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <ListView x:Name="lst_todos" ItemSelected="lst_todos_ItemSelected" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.ContextActions>
-                                    <MenuItem Text="Concluir" Clicked="MenuItem_Clicked_Concluir" />
-                                    <MenuItem Text="Remover" Clicked="MenuItem_Clicked_1" />
-                                </ViewCell.ContextActions>
+            <SearchBar x:Name="txt_search"
+                       Margin="0, 0, 0, 0"
+                       Placeholder="Busca de Afazeres"
+                       TextChanged="txt_search_TextChanged" />
+            
+            <Grid Margin="0, 50, 0, 0">
+                <RefreshView x:Name="ref_carregando" 
+                         IsRefreshing="False" 
+                         Refreshing="lst_todos_Refreshing">
 
-                                <StackLayout Padding="20,20,0,0" Style="{StaticResource stacklayoutStyle}">
-                                    <Grid ColumnDefinitions="Auto" RowDefinitions="Auto">
-                                        <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" Text="{Binding Name}"/>
-                                    </Grid>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    <ListView x:Name="lst_todos" ItemSelected="lst_todos_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Concluir" Clicked="MenuItem_Clicked_Concluir" />
+                                        <MenuItem Text="Editar" Clicked="MenuItem_Clicked_Editar" />
+                                    </ViewCell.ContextActions>
+
+                                    <StackLayout Padding="20,20,0,0" Style="{StaticResource stacklayoutStyle}">
+                                        <Grid ColumnDefinitions="Auto" RowDefinitions="Auto">
+                                            <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" HorizontalTextAlignment="Center" FontSize="18" Text="{Binding Name}"/>
+                                        </Grid>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </RefreshView>
             </Grid>
             <Button x:Name="fabutton" Image="add_icon.png"
                 Clicked="ToolbarItem_Clicked_CreateToDo" IsVisible="True"

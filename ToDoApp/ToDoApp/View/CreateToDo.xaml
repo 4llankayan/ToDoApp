@@ -12,11 +12,11 @@
         <StackLayout>
             <Frame>
                 <StackLayout>
-                    <Label Text="Nome:" />
+                    <Label Text="Nome:" LineBreakMode="WordWrap"/>
                     <Entry x:Name="txt_name" Text="{Binding Name }" />
 
                     <Label Text="Descrição:" />
-                    <Entry x:Name="txt_description" Text="{Binding Description }" />
+                    <Editor x:Name="txt_description" Text="{Binding Description }" AutoSize="TextChanges" />
 
                 </StackLayout>
             </Frame>
